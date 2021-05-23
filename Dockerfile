@@ -1,21 +1,15 @@
 # set author and base
 FROM alpine:3.12
 
-LABEL version="1.3.1"
-LABEL description="Development build"
-
-# let's setup all the necessary environment variables
 ENV BUILD_HOME=/build
 ENV GOPATH=$BUILD_HOME/golang
 ENV PATH=$GOPATH/bin:$PATH
-# where to clone from
 ENV HEKETI_REPO="https://github.com/heketi/heketi.git"
 ENV HEKETI_BRANCH="master"
 ENV GO111MODULE=off
 
-RUN apk add --no-cache glide git make mercurial findutils
-
-RUN mkdir $BUILD_HOME $GOPATH && \
+RUN apk add --no-cache glide git make mercurial findutils && \
+    mkdir $BUILD_HOME $GOPATH && \
     mkdir -p $GOPATH/src/github.com/heketi
 
 WORKDIR $GOPATH/src/github.com/heketi
@@ -30,7 +24,8 @@ RUN glide install -v && \
     make install prefix=/usr && \
     cp /usr/share/heketi/container/heketi-start.sh /usr/bin/heketi-start.sh && \
     cp /usr/share/heketi/container/heketi.json /etc/heketi/heketi.json && \
-    glide cc 
+    glide cc && \
+    dos2unix /usr/bin/heketi-start.sh
 
 WORKDIR /
 
