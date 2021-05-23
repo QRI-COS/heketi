@@ -47,7 +47,7 @@ items:
         serviceAccountName: heketi-service-account
         containers:
         - image: jenderleqri/heketi:arm64
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           name: deploy-heketi
           env:
           - name: HEKETI_EXECUTOR
@@ -59,7 +59,7 @@ items:
           - name: HEKETI_SNAPSHOT_LIMIT
             value: '14'
           - name: HEKETI_KUBE_GLUSTER_DAEMONSET
-            value: y
+            value: "y"
           ports:
           - containerPort: 8080
           volumeMounts:
