@@ -8,7 +8,7 @@ ENV HEKETI_REPO="https://github.com/heketi/heketi.git"
 ENV HEKETI_BRANCH="master"
 ENV GO111MODULE=off
 
-RUN apk add --no-cache glide git make mercurial findutils && \
+RUN apk add --no-cache glide git make mercurial findutils bash && \
     mkdir $BUILD_HOME $GOPATH && \
     mkdir -p $GOPATH/src/github.com/heketi
 
