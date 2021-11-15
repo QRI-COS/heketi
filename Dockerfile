@@ -1,5 +1,5 @@
 # set author and base
-FROM alpine:3.12
+FROM alpine:3.13
 
 ENV BUILD_HOME=/build
 ENV GOPATH=$BUILD_HOME/golang
